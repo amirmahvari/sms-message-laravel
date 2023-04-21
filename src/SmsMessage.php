@@ -1,7 +1,6 @@
 <?php
 namespace Amirmahvari\SmsMessage;
 
-use Illuminate\Support\Facades\Http;
 use App\Models\Kind;
 
 abstract class SmsMessage
@@ -21,10 +20,10 @@ abstract class SmsMessage
      */
     public function __construct($lines = []) {
         $this->lines = $lines;
-        $this->baseUrl = config('app_config.sms_setting.url');
-        $this->api = config('app_config.sms_setting.api');
-        $this->secret = config('app_config.sms_setting.secret');
-        $this->from = config('app_config.sms_setting.number');
+        $this->baseUrl = config('sms_message.url');
+        $this->api = config('sms_message.api');
+        $this->secret = config('sms_message.secret');
+        $this->from = config('sms_message.number');
     }
 
     public function line($line = ''): self {
@@ -49,10 +48,10 @@ abstract class SmsMessage
     }
 
     public function pattern(string $key,$parameters=[]): self {
-        $kind = Kind::findKey('sms_pattern' , $key)->first();
-        $this->template = $kind->value2;
+        $pattern = config("sms_message.patterns.$key");
+        $this->template = $pattern['template'];
         $this->parameters = $parameters;
-        $this->status($kind->is_active);
+        $this->status($pattern['is_active']);
         return $this;
     }
 
