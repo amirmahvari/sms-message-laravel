@@ -3,6 +3,7 @@
 namespace Amirmahvari\SmsMessage\Bridges;
 
 use Amirmahvari\SmsMessage\Contracts\ReceivedSmsInterface;
+use Amirmahvari\SmsMessage\Message;
 use Amirmahvari\SmsMessage\SmsMessage;
 use Carbon\Carbon;
 use Exception;
