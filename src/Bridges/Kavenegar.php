@@ -73,9 +73,9 @@ class Kavenegar extends SmsMessage implements ReceivedSmsInterface
         }
     }
 
-    public function received(bool $is_seen = true): array
+    public function received(bool $is_seen = false): array
     {
-        $messages = Facade::Receive($this->from, 1);
+        $messages = Facade::Receive($this->from, $is_seen);
         $items = [];
         foreach($messages as $message)
         {
